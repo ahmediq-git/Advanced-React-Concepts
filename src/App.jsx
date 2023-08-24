@@ -1,20 +1,32 @@
 import React, {Component} from 'react'
+
+// Event binders
 import EventBind1 from './concepts/EventBind1';
 import EventBind2 from './concepts/EventBind2';
 import EventBind3 from './concepts/EventBind3';
+// Fragments
 import Fragments from './concepts/Fragments/Fragments'
-
+// Portals
 import Portals from './concepts/Portals'
-
+// High Order Components
 // import WithCount from './concepts/HighOrderComponents/WithCount'
 import HighOrder1 from './concepts/HighOrderComponents/HighOrder1';
 import HighOrder2 from './concepts/HighOrderComponents/HighOrder2';
 // With React.Fragment, the elements appear as siblings
 
+// Render Props
 import RenderProps1 from './concepts/RenderProps/RenderProps1';
 import RenderProps2 from './concepts/RenderProps/RenderProps2';
 import User from './concepts/RenderProps/User'
 import Counter from './concepts/RenderProps/Counter'
+
+// useReducers
+import Reducer1 from './concepts/useReducerHook/Reducer1'
+import Reducer2 from './concepts/useReducerHook/Reducer2' 
+import FetchData from './concepts/useReducerHook/FetchData'
+
+// Custom Hooks
+import PageUsingHook from './concepts/customHooks/PageUsingHook';
 
 class App extends Component {
   render(){
@@ -66,7 +78,12 @@ class App extends Component {
 
         <h3>useReducer Hook</h3>
 
-        
+        <Reducer1/>
+        <Reducer2/>
+        <FetchData/>
+
+        <h3>Custom Hooks</h3>
+        <PageUsingHook/>
       </React.Fragment>
     )
   }
