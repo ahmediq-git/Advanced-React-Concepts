@@ -1,92 +1,86 @@
-import React, {Component} from 'react'
+import React, {useReducer} from 'react';
+import TransitionFile1 from './TransitionFile1';
+import TransitionFile2 from './TransitionFile2';
+import TransitionFile3 from './TransitionFile3';
+import TransitionFile4 from './TransitionFile4';
+import { BrowserRouter as Router,Routes, Route } from 'react-router-dom';
+import User from './furtherConcepts/ContextWithAuth/User'
+import AdminPage from './furtherConcepts/ContextWithAuth/AdminPage'
+import Home from './furtherConcepts/ContextWithAuth/Home'
+import {Link} from 'react-router-dom'
 
-// Event binders
-import EventBind1 from './concepts/EventBind1';
-import EventBind2 from './concepts/EventBind2';
-import EventBind3 from './concepts/EventBind3';
-// Fragments
-import Fragments from './concepts/Fragments/Fragments'
-// Portals
-import Portals from './concepts/Portals'
-// High Order Components
-// import WithCount from './concepts/HighOrderComponents/WithCount'
-import HighOrder1 from './concepts/HighOrderComponents/HighOrder1';
-import HighOrder2 from './concepts/HighOrderComponents/HighOrder2';
-// With React.Fragment, the elements appear as siblings
+function Navigation(){
+  return (
+    <div style={{display:'flex', flexDirection:'row',  justifyContent:'space-between', width: 700}}>
+      <Link to="/TransitionFile1">concepts</Link>
+      <Link to="/TransitionFile2">Further concepts</Link>
+      <Link to="/TransitionFile3">Context Examples</Link>
+      {/* <Link to="/TransitionFile4">Learning render</Link> */}
+    </div>
+  )
+}
 
-// Render Props
-import RenderProps1 from './concepts/RenderProps/RenderProps1';
-import RenderProps2 from './concepts/RenderProps/RenderProps2';
-import User from './concepts/RenderProps/User'
-import Counter from './concepts/RenderProps/Counter'
+export const AppContext = React.createContext()
+const initialState = false
+const accessReducer = (state, action) =>{
+  switch(action.type){
+    case 'access':
+      return true
+    case 'no-access':
+      return false
+    default:
+      return state
+  }
+}
 
-// useReducers
-import Reducer1 from './concepts/useReducerHook/Reducer1'
-import Reducer2 from './concepts/useReducerHook/Reducer2' 
-import FetchData from './concepts/useReducerHook/FetchData'
 
-// Custom Hooks
-import PageUsingHook from './concepts/customHooks/PageUsingHook';
+export const LoginContext = React.createContext()
+const loginState = {user: '', designation:'', auth: false}
+const loginReducer = (state, action) =>{
+  switch(action.type) {
+    case 'login-admin':
+      return {user: action.payload, designation:'admin', auth: true}
+    case 'login-user':
+      return {user: action.payload, designation:'user', auth: true}
+    case 'logout':
+      return {user: '', designation:'', auth: false}
+    default:
+      return state
+  }
+}
 
-class App extends Component {
-  render(){
+
+
+function App() {
+
+    const [state, accessDispatch] = useReducer(accessReducer, initialState)
+    const [statelogin, loginDispatch] = useReducer(loginReducer, loginState)
+
     return (
       <React.Fragment>
-        <h1>React Concepts</h1>
+      
+      <AppContext.Provider value={{state: state, accessDispatch: accessDispatch}}>
+        <LoginContext.Provider value={{state: statelogin, loginDispatch: loginDispatch}}>
+          <Router>
+            <Navigation/>
+              <Routes> 
+                      <Route exact path='/' element={< TransitionFile1/>} />
+                      <Route exact path='/Home' element={< Home/>} />
+                      <Route exact path='/AdminPage' element={< AdminPage/>} />
+                      <Route exact path='/User' element ={<User/>} />
+                      <Route exact path='/TransitionFile1' element ={<TransitionFile1/>} />
+                      <Route exact path='/TransitionFile2' element ={<TransitionFile2/>} />
+                      <Route exact path='/TransitionFile3' element ={<TransitionFile3/>} />
+                      {/* <Route exact path='/TransitionFile4' element ={<TransitionFile4/>} /> */}
+                      <Route path="*" element={<div>There is Nothing here</div>}></Route>
+              </Routes>
+          </Router>
+        </LoginContext.Provider>
+      </AppContext.Provider>
 
-        <h3>Event Binding</h3>
-
-        <h5>EventBind example 1</h5>
-        <EventBind1/>
-        <h5>EventBind example 2</h5>
-        <EventBind2/>
-        <h5>EventBind example 3</h5>
-        <EventBind3/>
-
-        <h3>Fragments</h3>
-
-        <h5>Fragments example 1</h5>
-        <Fragments/>
-
-        <h3>Portals</h3>
-        <div>Portal displayed in the center</div>
-        <Portals/>
-
-        <h3>High Order Components</h3>
-        <div>These are excellent for layouts, and just need to wrap a component with HOC</div>
-        <div>&nbsp;</div>
-
-        <HighOrder1 name='Ahmed'/>
-        <div>&nbsp;</div>
-        <HighOrder2/>
-
-        <h3>Render Props</h3>
-
-        <Counter render={
-          (count, incrementCount)=>
-            <RenderProps1 count={count} incrementCount={incrementCount}/>
-          
-        }/>
-
-        <Counter render={
-          (count, incrementCount)=>
-            <RenderProps2 count={count} incrementCount={incrementCount}/>
-          
-        }/> 
-
-        <User name={(isLoggedin)=>isLoggedin?"Ahmed":"Guest"}/>
-
-        <h3>useReducer Hook</h3>
-
-        <Reducer1/>
-        <Reducer2/>
-        <FetchData/>
-
-        <h3>Custom Hooks</h3>
-        <PageUsingHook/>
       </React.Fragment>
     )
   }
-}
+
 
 export default App;
