@@ -15,7 +15,6 @@ function Navigation(){
       <Link to="/TransitionFile1">concepts</Link>
       <Link to="/TransitionFile2">Further concepts</Link>
       <Link to="/TransitionFile3">Context Examples</Link>
-      {/* <Link to="/TransitionFile4">Learning render</Link> */}
     </div>
   )
 }
@@ -71,7 +70,6 @@ function App() {
                       <Route exact path='/TransitionFile1' element ={<TransitionFile1/>} />
                       <Route exact path='/TransitionFile2' element ={<TransitionFile2/>} />
                       <Route exact path='/TransitionFile3' element ={<TransitionFile3/>} />
-                      {/* <Route exact path='/TransitionFile4' element ={<TransitionFile4/>} /> */}
                       <Route path="*" element={<div>There is Nothing here</div>}></Route>
               </Routes>
           </Router>
