@@ -2,7 +2,6 @@ import React, {useReducer} from 'react';
 import TransitionFile1 from './TransitionFile1';
 import TransitionFile2 from './TransitionFile2';
 import TransitionFile3 from './TransitionFile3';
-import TransitionFile4 from './TransitionFile4';
 import { BrowserRouter as Router,Routes, Route } from 'react-router-dom';
 import User from './furtherConcepts/ContextWithAuth/User'
 import AdminPage from './furtherConcepts/ContextWithAuth/AdminPage'
