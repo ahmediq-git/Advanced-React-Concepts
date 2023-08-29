@@ -6,7 +6,7 @@ class ComponentF extends Component {
     return (
       <UserConsumer>
         { (username)=>{
-          return   <div>This is component {username}</div>
+          return   <div>ComponentF This is component {username}</div>
         }
         }
     

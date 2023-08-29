@@ -8,7 +8,7 @@ class ComponentE extends Component {
   render() {
     return (
       <>
-      <div>The context value of method 2 is {this.context}</div>
+      <div>ComponentE The context value of method 2 is {this.context}</div>
       <ComponentF/>
       </>  
     )
